@@ -1,0 +1,1387 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Assemble_Material_Report" this:Assemble_Material_Report.dicDIC="[New Dictionary(Of String, Object)]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:maes="clr-namespace:Microsoft.Activities.Extensions.Statements;assembly=Microsoft.Activities.Extensions" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:si="clr-namespace:System.IO;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="dicDIC" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1279,982</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Assemble_Material_Report_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="50">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Flowchart DisplayName="Assemble_Material_Report" sap:VirtualizedContainerService.HintSize="1289,877" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+    <Flowchart.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dbDIC" />
+      <Variable x:TypeArguments="x:String" Name="StartTime" />
+      <Variable x:TypeArguments="x:String" Name="stMachineName" />
+      <Variable x:TypeArguments="x:String" Name="DayCurrent" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtbDayRecent" />
+      <Variable x:TypeArguments="x:String" Name="strDayRencent" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtbDayCurrent" />
+      <Variable x:TypeArguments="x:String" Name="strCurrent" />
+      <Variable x:TypeArguments="s:String[]" Name="FileNameSeverAss" />
+      <Variable x:TypeArguments="ui:WorkbookApplication" Name="WbAssInput" />
+      <Variable x:TypeArguments="x:String" Name="stBodyMail" />
+      <Variable x:TypeArguments="x:String" Name="stBodyNotificationMail" />
+      <Variable x:TypeArguments="x:String" Name="strEndTime" />
+    </Flowchart.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <av:Point x:Key="ShapeLocation">490,12.5</av:Point>
+        <av:Size x:Key="ShapeSize">60,75</av:Size>
+        <x:Double x:Key="Width">1255</x:Double>
+        <x:Double x:Key="Height">841</x:Double>
+        <av:PointCollection x:Key="ConnectorLocation">490,50 270,50 270,114.5</av:PointCollection>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Flowchart.StartNode>
+      <x:Reference>__ReferenceID15</x:Reference>
+    </Flowchart.StartNode>
+    <FlowStep>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">520,127</av:Point>
+          <av:Size x:Key="ShapeSize">200,66</av:Size>
+          <av:PointCollection x:Key="ConnectorLocation">620,193 620,223 520,223 520,247</av:PointCollection>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Sequence DisplayName="DIC" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:BuildDataTable DataTable="[dbDIC]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Key&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Value&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;PortSendPOP3MailServer&lt;/Key&gt;&#xA;    &lt;Value&gt;25&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;EmailAddressDeveloper&lt;/Key&gt;&#xA;    &lt;Value&gt;developer@ykk.com.vn&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;EmailPassword&lt;/Key&gt;&#xA;    &lt;Value&gt;Password#123&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;NameSenderMail&lt;/Key&gt;&#xA;    &lt;Value&gt;ROBOTICS&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;IPSendMailServer&lt;/Key&gt;&#xA;    &lt;Value&gt;10.246.192.215&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:BuildDataTable>
+        <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dbDIC]" DisplayName="For each row in dtDIC" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+          <ui:ForEachRow.Body>
+            <ActivityAction x:TypeArguments="sd:DataRow">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Sq/Add all contents into Dictionary" sap:VirtualizedContainerService.HintSize="627,470" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If Condition="[NOT String.IsNullOrEmpty(row(&quot;Key&quot;).ToString.Trim)]" sap:VirtualizedContainerService.HintSize="585,378" sap2010:WorkflowViewState.IdRef="If_1">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence DisplayName="Sq/Add to dictionary" sap:VirtualizedContainerService.HintSize="440,230" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <maes:AddToDictionary x:TypeArguments="x:String, x:Object" Dictionary="[dicDIC]" DisplayName="Add to dictionary" sap:VirtualizedContainerService.HintSize="398,138" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_1" Key="[row(&quot;Key&quot;).ToString]" Value="[row(&quot;Value&quot;).ToString]" />
+                    </Sequence>
+                  </If.Then>
+                </If>
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEachRow.Body>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </ui:ForEachRow>
+      </Sequence>
+      <FlowStep.Next>
+        <FlowStep x:Name="__ReferenceID1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <av:Point x:Key="ShapeLocation">420,247</av:Point>
+              <av:Size x:Key="ShapeSize">200,66</av:Size>
+              <av:PointCollection x:Key="ConnectorLocation">520,313 520,366.5</av:PointCollection>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Check work" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="376,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[DayCurrent]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Now.ToString("yyyyMMdd")]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Sequence DisplayName="Take Day work" sap:VirtualizedContainerService.HintSize="376,618" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtbDayCurrent]" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_3" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT DAY FROM RPALIB.ROBOT_CALENDAR_NT WHERE UCASE(LOCATION) ='NT' AND DAY &gt; '20200602' AND DAY &lt;=&quot; + DayCurrent +&quot; ORDER BY DAY DESC LIMIT 1&quot;]" ConnectionString="Dsn=RPALIB;system=10.246.194.1;uid=ROBOT;dbq=RPALIB RPALIB;dftpkglib=QGPL;languageid=ENU;pkg=QGPL/DEFAULT(IBM),2,0,1,0,512;qrystglmt=-1;pwd=robotics">
+                <ui:ExecuteQuery.Parameters>
+                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                </ui:ExecuteQuery.Parameters>
+              </ui:ExecuteQuery>
+              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtbDayCurrent]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+                <ui:ForEachRow.Body>
+                  <ActivityAction x:TypeArguments="sd:DataRow">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[strCurrent]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[row(0).ToString]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachRow.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ForEachRow>
+              <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtbDayRecent]" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_2" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT DAY FROM RPALIB.ROBOT_CALENDAR_NT WHERE UCASE(LOCATION) ='NT' AND DAY &gt; '20200602' AND DAY &lt;&quot; + DayCurrent +&quot; ORDER BY DAY DESC LIMIT 1&quot;]" ConnectionString="Dsn=RPALIB;system=10.246.194.1;uid=ROBOT;dbq=RPALIB RPALIB;dftpkglib=QGPL;languageid=ENU;pkg=QGPL/DEFAULT(IBM),2,0,1,0,512;qrystglmt=-1;pwd=robotics">
+                <ui:ExecuteQuery.Parameters>
+                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                </ui:ExecuteQuery.Parameters>
+              </ui:ExecuteQuery>
+              <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtbDayRecent]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                <ui:ForEachRow.Body>
+                  <ActivityAction x:TypeArguments="sd:DataRow">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[strDayRencent]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[row(0).ToString]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachRow.Body>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:ForEachRow>
+              <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtbDayRecent]" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_4" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT DAY FROM RPALIB.ROBOT_CALENDAR_NT WHERE UCASE(LOCATION) ='NT' AND DAY &gt; '20200602' AND DAY &lt;&quot; + DayCurrent +&quot; ORDER BY DAY DESC LIMIT 1&quot;]" ConnectionString="Dsn=RPALIB;system=10.246.194.1;uid=ROBOT;dbq=RPALIB RPALIB;dftpkglib=QGPL;languageid=ENU;pkg=QGPL/DEFAULT(IBM),2,0,1,0,512;qrystglmt=-1;pwd=robotics">
+                <ui:ExecuteQuery.Parameters>
+                  <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                </ui:ExecuteQuery.Parameters>
+              </ui:ExecuteQuery>
+            </Sequence>
+          </Sequence>
+          <FlowStep.Next>
+            <FlowDecision x:Name="__ReferenceID2" Condition="[DayCurrent = Trim(strCurrent)]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <av:Point x:Key="ShapeLocation">480.5,366.5</av:Point>
+                  <av:Size x:Key="ShapeSize">79,87</av:Size>
+                  <av:PointCollection x:Key="TrueConnector">480.5,410 450.5,410 450.5,377 320,377 320,407</av:PointCollection>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <FlowDecision.True>
+                <FlowStep x:Name="__ReferenceID0">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <av:Point x:Key="ShapeLocation">220,407</av:Point>
+                      <av:Size x:Key="ShapeSize">200,66</av:Size>
+                      <av:PointCollection x:Key="ConnectorLocation">320,473 320,517</av:PointCollection>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence DisplayName="History  database" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[StartTime]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[Date.Now.ToString("MM/dd/yy hh:mm:ss")]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[stMachineName]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[Environment.MachineName]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:ExecuteQuery ContinueOnError="{x:Null}" DataTable="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_1" ProviderName="System.Data.Odbc" Sql="[&quot;INSERT INTO RPALIB.ROBOT_LOG_HCM_SCH VALUES('Assemble Material Report','&quot;+StartTime +&quot;'&quot; +&quot;  ,   '','','','','','','', ' &quot; +  stMachineName + &quot;  ') &quot;]" ConnectionString="Dsn=RPALIB;uid=robot;pwd=robotics">
+                      <ui:ExecuteQuery.Parameters>
+                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                      </ui:ExecuteQuery.Parameters>
+                    </ui:ExecuteQuery>
+                  </Sequence>
+                  <FlowStep.Next>
+                    <FlowStep x:Name="__ReferenceID3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <av:Point x:Key="ShapeLocation">220,517</av:Point>
+                          <av:Size x:Key="ShapeSize">200,66</av:Size>
+                          <av:PointCollection x:Key="ConnectorLocation">420,550 580,550 580,616.5</av:PointCollection>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Sequence DisplayName="Check File Server" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="D:\Robotics\AssembleMaterialReport">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:CreateDirectory>
+                        <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="D:\Robotics\AssembleMaterialReport\Output">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:CreateDirectory>
+                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="s:String[]">[FileNameSeverAss]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("H:\Robotics\Assemble Material Report")]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                      <FlowStep.Next>
+                        <FlowDecision x:Name="__ReferenceID4" Condition="[FileNameSeverAss.Length &lt; 1]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_2">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <av:Point x:Key="ShapeLocation">540.5,616.5</av:Point>
+                              <av:Size x:Key="ShapeSize">79,87</av:Size>
+                              <av:PointCollection x:Key="TrueConnector">540.5,660 290,660 290,717</av:PointCollection>
+                              <av:PointCollection x:Key="FalseConnector">619.5,660 750,660 750,717</av:PointCollection>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <FlowDecision.True>
+                            <FlowStep x:Name="__ReferenceID5">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <av:Point x:Key="ShapeLocation">190,717</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </Sequence>
+                            </FlowStep>
+                          </FlowDecision.True>
+                          <FlowDecision.False>
+                            <FlowStep x:Name="__ReferenceID6">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <av:Point x:Key="ShapeLocation">650,717</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Sequence DisplayName="copy FILE" sap:VirtualizedContainerService.HintSize="284,615" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:CopyFile ContinueOnError="{x:Null}" Destination="D:\Robotics\AssembleMaterialReport\Lockpin_ POP_Ver1.1.xls" DisplayName="Copy File Server" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="H:\Robotics\Assemble Material Report\ROBOT\Lockpin_ POP_Ver1.1.xls">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:CopyFile>
+                                  </Sequence>
+                                  <Sequence DisplayName="Open File Input" sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="460,1118" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Workbook="[WbAssInput]" WorkbookPath="D:\Robotics\AssembleMaterialReport\Lockpin_ POP_Ver1.1.xls">
+                                      <ui:ExcelApplicationScope.Body>
+                                        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                                          <ActivityAction.Argument>
+                                            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                                          </ActivityAction.Argument>
+                                          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="426,1009" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="Workbook_Open" EntryMethodParameters="[{strDayRencent}]" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_2" />
+                                            <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="CommandButton1_Click" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_1" />
+                                            <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="TestFiter" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_6" />
+                                            <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="ColorSent" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_8" />
+                                            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="384,51" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                              <TryCatch.Try>
+                                                <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="Tester" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_10" />
+                                              </TryCatch.Try>
+                                              <TryCatch.Catches>
+                                                <Catch x:TypeArguments="si:IOException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <ActivityAction x:TypeArguments="si:IOException">
+                                                    <ActivityAction.Argument>
+                                                      <DelegateInArgument x:TypeArguments="si:IOException" Name="exception" />
+                                                    </ActivityAction.Argument>
+                                                  </ActivityAction>
+                                                </Catch>
+                                              </TryCatch.Catches>
+                                            </TryCatch>
+                                            <ui:CopyFile ContinueOnError="{x:Null}" Destination="H:\Robotics\Reference\AssembleMaterialReport\ExportmyChart.jpg" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="384,157" sap2010:WorkflowViewState.IdRef="CopyFile_3" Overwrite="True" Path="D:\Robotics\ExportmyChart.jpg" />
+                                            <ui:ExcelSaveWorkbook DisplayName="Save Workbook" sap:VirtualizedContainerService.HintSize="384,22" sap2010:WorkflowViewState.IdRef="ExcelSaveWorkbook_1" />
+                                            <ui:ExcelCloseWorkbook DisplayName="Close Workbook" sap:VirtualizedContainerService.HintSize="384,59" sap2010:WorkflowViewState.IdRef="ExcelCloseWorkbook_1" Workbook="[WbAssInput]" />
+                                          </Sequence>
+                                        </ActivityAction>
+                                      </ui:ExcelApplicationScope.Body>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:ExcelApplicationScope>
+                                  </Sequence>
+                                  <Sequence DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="242,66" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Sequence DisplayName="Sq\\ Send email Complete" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <Sequence DisplayName="Sq\\ Creat mail body" sap:VirtualizedContainerService.HintSize="304,542" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,64" sap2010:WorkflowViewState.IdRef="Assign_7">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[stBodyMail]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String" xml:space="preserve">
+&lt;html&gt; 
+	
+	&lt;head&gt; 
+	&lt;meta http-equiv=Content-Type content=““text/html; charset=windows-1252”“&gt; 
+	&lt;meta name=Generator content=““Microsoft Word 15 (filtered)”“&gt; 
+	&lt;style&gt; 
+	&lt;!-- 
+	/* Font Definitions */ 
+	@font-face 
+	{font-family:Helv; 
+	panose-1:2 11 6 4 2 2 2 3 2 4;} 
+	@font-face 
+	{font-family:Wingdings; 
+	panose-1:5 0 0 0 0 0 0 0 0 0;} 
+	@font-face 
+	{font-family:”“MS Mincho”“; 
+	panose-1:2 2 6 9 4 2 5 8 3 4;} 
+	@font-face 
+	{font-family:”“Cambria Math”“; 
+	panose-1:2 4 5 3 5 4 6 3 2 4;} 
+	@font-face 
+	{font-family:Calibri; 
+	panose-1:2 15 5 2 2 2 4 3 2 4;} 
+	@font-face 
+	{font-family:”“Segoe UI”“; 
+	panose-1:2 11 5 2 4 2 4 2 2 3;} 
+	@font-face 
+	{font-family:Tahoma; 
+	panose-1:2 11 6 4 3 5 4 4 2 4;} 
+	@font-face 
+	{font-family:Verdana; 
+	panose-1:2 11 6 4 3 5 4 4 2 4;} 
+	@font-face 
+	{font-family:Webdings; 
+	panose-1:5 3 1 2 1 5 9 6 7 3;} 
+	@font-face 
+	{font-family:”“\@MS Mincho”“; 
+	panose-1:0 0 0 0 0 0 0 0 0 0;} 
+	/* Style Definitions */ 
+	p.MsoNormal, li.MsoNormal, div.MsoNormal 
+	{margin-top:0cm; 
+	margin-right:0cm; 
+	margin-bottom:8.0pt; 
+	margin-left:0cm; 
+	line-height:106%; 
+	font-size:11.0pt; 
+	font-family:”“Calibri”“,sans-serif;} 
+	.MsoChpDefault 
+	{font-size:10.0pt; 
+	font-family:”“Calibri”“,sans-serif;} 
+	@page WordSection1 
+	{size:612.0pt 792.0pt; 
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;} 
+	div.WordSection1 
+	{page:WordSection1;} 
+	--&gt; 
+	&lt;/style&gt; 
+	
+	&lt;/head&gt; 
+	
+	&lt;body lang=EN-US&gt; 
+	
+
+    
+	&lt;div Class=WordSection1&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;span style='font-size:10.0pt;line-height:106%;font-family: 
+	““Segoe UI”“,sans-serif;color:black'&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;b&gt;&lt;span style='font-size:15px;line-height:106%; 
+	font-family:”“Segoe UI”“,sans-serif;color:black'&gt;Dear [UserName] &lt;/span&gt;&lt;/b&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'&gt;&lt;span 
+	style='font-size:10.0pt;line-height:106%;font-family:”“Segoe UI”“,sans-serif; 
+	color:black'&gt;[BodyMail]&lt;br&gt; 
+	&lt;br&gt; 
+	&lt;/span&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;span style='font-size:10.0pt;line-height:106%;font-family: 
+	““Segoe UI”“,sans-serif;color:black'&gt;Best regards,&lt;/span&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;b&gt;&lt;span style='font-size:10.0pt;line-height:106%; 
+	font-family:”“Segoe UI”“,sans-serif;color:black'&gt;Robotics (Mr.) – [NameMachine]&lt;/span&gt;&lt;/b&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;span style='font-size:8.0pt;line-height:106%;font-family: 
+	““Verdana”“,sans-serif;color:black'&gt;===============================================&lt;br&gt; 
+	&lt;/span&gt;&lt;span style='font-size:8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif; 
+	color:navy'&gt;| &lt;/span&gt;&lt;span style='font-size:10.0pt;line-height:106%;font-family: 
+	Wingdings;color:navy'&gt;*&lt;/span&gt;&lt;span style='font-size:10.0pt;line-height:106%; 
+	font-family:”“Verdana”“,sans-serif;color:navy'&gt; &lt;/span&gt;&lt;span style='font-size: 
+	8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif;color:navy'&gt;Email: &lt;u&gt;developer@ykk.com.vn&lt;/u&gt; 
+	| Website:  &lt;u&gt;www.ykk.com.vn&lt;/u&gt;&lt;/span&gt;&lt;span style='font-size:8.0pt; 
+	line-height:106%;font-family:”“Verdana”“,sans-serif;color:black'&gt; &lt;/span&gt;&lt;b&gt;&lt;span 
+	style='font-size:8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif; 
+	color:navy'&gt;&lt;br&gt; 
+	&lt;br&gt; 
+	YKK VietNam Co., LTD - Ho Chi Minh Branch Office&lt;/span&gt;&lt;/b&gt;&lt;span 
+	style='font-size:8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif; 
+	color:navy'&gt;&lt;br&gt; 
+	4th Floor, AB Tower, 76 Le Lai St., Ben Thanh Ward, Dist. 1, HCMC, Viet Nam&lt;br&gt; 
+	&lt;/span&gt;&lt;span style='font-size:8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif; 
+	color:green'&gt;===============================================&lt;br&gt; 
+	&lt;/span&gt;&lt;b&gt;&lt;span style='font-size:14.0pt;line-height:106%;font-family:Webdings; 
+	color:green'&gt;P&lt;/span&gt;&lt;/b&gt;&lt;span style='font-size:6.0pt;line-height:106%; 
+	font-family:”“Helv”“,sans-serif;color:black'&gt; &lt;/span&gt;&lt;b&gt;&lt;span style='font-size: 
+	8.0pt;line-height:106%;font-family:”“Arial”“,sans-serif;color:green'&gt;&amp;quot;Please 
+	consider the environment before printing this e-mail&amp;quot;&lt;br&gt; 
+	&lt;/span&gt;&lt;/b&gt;&lt;b&gt;&lt;span style='font-size:6.0pt;line-height:106%;font-family:”“Tahoma”“,sans-serif; 
+	color:black'&gt;CONFIDENTIAL NOTE:&lt;/span&gt;&lt;/b&gt;&lt;span style='font-size:7.0pt; 
+	line-height:106%;font-family:”“Tahoma”“,sans-serif;color:black'&gt; The information 
+	contained In this email Is intended only For the use Of the individual Or 
+	entity named&lt;br&gt; 
+	above And may contain information that Is privileged, confidential And exempt 
+	From disclosure under applicable law. If the&lt;br&gt; 
+	reader Of this message Is Not the intended recipient, you are hereby notified 
+	that any dissemination, distribution Or copying&lt;br&gt; 
+	Of this communication Is strictly prohibited. Thank you.&lt;br&gt;&lt;/span&gt;&lt;/p&gt; 
+	
+	&lt;/div&gt; 
+	
+	&lt;/body&gt; 
+	
+	&lt;/html&gt;
+</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[stBodyNotificationMail]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;p style ='margin-bottom : 20px'&gt;Please look through the image as below and refer to the details file in output result.&lt;/p&gt;" + "&lt;br&gt;" +"&lt;img  style ='width : 1245px ; hight : 50% ;  overflow: hidden;'src='H:\Robotics\Reference\AssembleMaterialReport\ExportmyChart.jpg' atl ='' /&gt;"]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[stMachineName]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String">[environment.MachineName]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <p:ReplaceString DisplayName="Replace string\\ Replace UserName mail" ExistingValue="%[UserName]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="ReplaceString_1" Input="[stBodyMail]" Replacement="Slider Section" Result="[stBodyMail]" />
+                                        <p:ReplaceString DisplayName="Replace string\\ Replace body mail" ExistingValue="%[BodyMail]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="ReplaceString_2" Input="[stBodyMail]" Replacement="[stBodyNotificationMail]" Result="[stBodyMail]" />
+                                        <p:ReplaceString DisplayName="Replace string\\ Replace Name Machine Mail" ExistingValue="%[NameMachine]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="ReplaceString_3" Input="[stBodyMail]" Replacement="[stMachineName]" Result="[stBodyMail]" />
+                                      </Sequence>
+                                      <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="[stBodyMail]" DisplayName="Send SMTP Mail Message" Email="[dicDIC(&quot;EmailAddressDeveloper&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="304,51" sap2010:WorkflowViewState.IdRef="SendMail_1" IsBodyHtml="True" Name="[dicDIC(&quot;NameSenderMail&quot;).ToString]" Password="[dicDIC(&quot;EmailPassword&quot;).ToString]" Port="25" SecureConnection="Auto" Server="[dicDIC(&quot;IPSendMailServer&quot;).ToString]" Subject="Check Material Lock pin Color DS" To="vansang@ykk.com.vn">
+                                        <ui:SendMail.Files>
+                                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                                            <InArgument x:TypeArguments="x:String">D:\Robotics\AssembleMaterialReport\Lockpin_ POP_Ver1.1.xls</InArgument>
+                                          </scg:List>
+                                        </ui:SendMail.Files>
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </ui:SendMail>
+                                    </Sequence>
+                                  </Sequence>
+                                  <Sequence DisplayName="History  database" sap:VirtualizedContainerService.HintSize="242,66" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                    <Sequence.Variables>
+                                      <Variable x:TypeArguments="x:String" Name="strEndTime" />
+                                    </Sequence.Variables>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[strEndTime]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[Date.Now.ToString("MM/dd/yy hh:mm:ss")]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <ui:ExecuteQuery ContinueOnError="{x:Null}" DataTable="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_6" ProviderName="System.Data.Odbc" Sql="[&quot;UPDATE RPALIB.ROBOT_LOG_HCM_SCH SET RESULT = 'COMPLETE' , END_TIME = '&quot; +strEndTime + &quot; ' WHERE  START_TIME = '&quot; +StartTime +&quot;'  &quot;]" ConnectionString="Dsn=RPALIB;uid=robot;pwd=robotics">
+                                      <ui:ExecuteQuery.Parameters>
+                                        <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                      </ui:ExecuteQuery.Parameters>
+                                    </ui:ExecuteQuery>
+                                  </Sequence>
+                                  <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="242,22" sap2010:WorkflowViewState.IdRef="Delete_2" Path="D:\Robotics\ExportmyChart.jpg" />
+                                </Sequence>
+                              </Sequence>
+                            </FlowStep>
+                          </FlowDecision.False>
+                        </FlowDecision>
+                      </FlowStep.Next>
+                    </FlowStep>
+                  </FlowStep.Next>
+                </FlowStep>
+              </FlowDecision.True>
+            </FlowDecision>
+          </FlowStep.Next>
+        </FlowStep>
+      </FlowStep.Next>
+    </FlowStep>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
+    <x:Reference>__ReferenceID2</x:Reference>
+    <x:Reference>__ReferenceID3</x:Reference>
+    <x:Reference>__ReferenceID4</x:Reference>
+    <x:Reference>__ReferenceID5</x:Reference>
+    <x:Reference>__ReferenceID6</x:Reference>
+    <FlowStep x:Name="__ReferenceID15">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <av:Point x:Key="ShapeLocation">170,114.5</av:Point>
+          <av:Size x:Key="ShapeSize">200,51</av:Size>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="438,287" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <TryCatch.Try>
+          <Flowchart sap:VirtualizedContainerService.HintSize="967,759" sap2010:WorkflowViewState.IdRef="Flowchart_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <av:Point x:Key="ShapeLocation">270,2.5</av:Point>
+                <av:Size x:Key="ShapeSize">60,75</av:Size>
+                <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,97</av:PointCollection>
+                <x:Double x:Key="Width">933</x:Double>
+                <x:Double x:Key="Height">723</x:Double>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Flowchart.StartNode>
+              <x:Reference>__ReferenceID14</x:Reference>
+            </Flowchart.StartNode>
+            <FlowStep x:Name="__ReferenceID14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <av:Point x:Key="ShapeLocation">200,97</av:Point>
+                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">300,163 300,197</av:PointCollection>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Sequence DisplayName="DIC" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:BuildDataTable DataTable="[dbDIC]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Key&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Value&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;PortSendPOP3MailServer&lt;/Key&gt;&#xA;    &lt;Value&gt;25&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;EmailAddressDeveloper&lt;/Key&gt;&#xA;    &lt;Value&gt;developer@ykk.com.vn&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;EmailPassword&lt;/Key&gt;&#xA;    &lt;Value&gt;Password#123&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;NameSenderMail&lt;/Key&gt;&#xA;    &lt;Value&gt;ROBOTICS&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;  &lt;TableName&gt;&#xA;    &lt;Key&gt;IPSendMailServer&lt;/Key&gt;&#xA;    &lt;Value&gt;10.246.192.215&lt;/Value&gt;&#xA;  &lt;/TableName&gt;&#xA;&lt;/NewDataSet&gt;">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:BuildDataTable>
+                <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dbDIC]" DisplayName="For each row in dtDIC" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_4">
+                  <ui:ForEachRow.Body>
+                    <ActivityAction x:TypeArguments="sd:DataRow">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="Sq/Add all contents into Dictionary" sap:VirtualizedContainerService.HintSize="627,470" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If Condition="[NOT String.IsNullOrEmpty(row(&quot;Key&quot;).ToString.Trim)]" sap:VirtualizedContainerService.HintSize="585,378" sap2010:WorkflowViewState.IdRef="If_2">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence DisplayName="Sq/Add to dictionary" sap:VirtualizedContainerService.HintSize="440,230" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <maes:AddToDictionary x:TypeArguments="x:String, x:Object" Dictionary="[dicDIC]" DisplayName="Add to dictionary" sap:VirtualizedContainerService.HintSize="398,138" sap2010:WorkflowViewState.IdRef="AddToDictionary`2_2" Key="[row(&quot;Key&quot;).ToString]" Value="[row(&quot;Value&quot;).ToString]" />
+                            </Sequence>
+                          </If.Then>
+                        </If>
+                      </Sequence>
+                    </ActivityAction>
+                  </ui:ForEachRow.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:ForEachRow>
+              </Sequence>
+              <FlowStep.Next>
+                <FlowStep x:Name="__ReferenceID7">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <av:Point x:Key="ShapeLocation">200,197</av:Point>
+                      <av:Size x:Key="ShapeSize">200,66</av:Size>
+                      <av:PointCollection x:Key="ConnectorLocation">300,263 300,306.5</av:PointCollection>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence DisplayName="Check work" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign sap:VirtualizedContainerService.HintSize="376,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[DayCurrent]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[Now.ToString("yyyyMMdd")]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Sequence DisplayName="Take Day work" sap:VirtualizedContainerService.HintSize="376,618" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtbDayCurrent]" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_7" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT DAY FROM RPALIB.ROBOT_CALENDAR_NT WHERE UCASE(LOCATION) ='NT' AND DAY &gt; '20200602' AND DAY &lt;=&quot; + DayCurrent +&quot; ORDER BY DAY DESC LIMIT 1&quot;]" ConnectionString="Dsn=RPALIB;system=10.246.194.1;uid=ROBOT;dbq=RPALIB RPALIB;dftpkglib=QGPL;languageid=ENU;pkg=QGPL/DEFAULT(IBM),2,0,1,0,512;qrystglmt=-1;pwd=robotics">
+                        <ui:ExecuteQuery.Parameters>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:ExecuteQuery.Parameters>
+                      </ui:ExecuteQuery>
+                      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtbDayCurrent]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+                        <ui:ForEachRow.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[strCurrent]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[row(0).ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEachRow.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEachRow>
+                      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtbDayRecent]" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_8" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT DAY FROM RPALIB.ROBOT_CALENDAR_NT WHERE UCASE(LOCATION) ='NT' AND DAY &gt; '20200602' AND DAY &lt;&quot; + DayCurrent +&quot; ORDER BY DAY DESC LIMIT 1&quot;]" ConnectionString="Dsn=RPALIB;system=10.246.194.1;uid=ROBOT;dbq=RPALIB RPALIB;dftpkglib=QGPL;languageid=ENU;pkg=QGPL/DEFAULT(IBM),2,0,1,0,512;qrystglmt=-1;pwd=robotics">
+                        <ui:ExecuteQuery.Parameters>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:ExecuteQuery.Parameters>
+                      </ui:ExecuteQuery>
+                      <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dtbDayRecent]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_6">
+                        <ui:ForEachRow.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_14">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[strDayRencent]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[row(0).ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEachRow.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEachRow>
+                      <ui:ExecuteQuery ContinueOnError="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DataTable="[dtbDayRecent]" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_9" ProviderName="System.Data.Odbc" Sql="[&quot;SELECT DAY FROM RPALIB.ROBOT_CALENDAR_NT WHERE UCASE(LOCATION) ='NT' AND DAY &gt; '20200602' AND DAY &lt;&quot; + DayCurrent +&quot; ORDER BY DAY DESC LIMIT 1&quot;]" ConnectionString="Dsn=RPALIB;system=10.246.194.1;uid=ROBOT;dbq=RPALIB RPALIB;dftpkglib=QGPL;languageid=ENU;pkg=QGPL/DEFAULT(IBM),2,0,1,0,512;qrystglmt=-1;pwd=robotics">
+                        <ui:ExecuteQuery.Parameters>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:ExecuteQuery.Parameters>
+                      </ui:ExecuteQuery>
+                    </Sequence>
+                  </Sequence>
+                  <FlowStep.Next>
+                    <FlowDecision x:Name="__ReferenceID8" Condition="[DayCurrent = Trim(strCurrent)]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <av:Point x:Key="ShapeLocation">260.5,306.5</av:Point>
+                          <av:Size x:Key="ShapeSize">79,87</av:Size>
+                          <av:PointCollection x:Key="TrueConnector">260.5,350 120,350 120,467</av:PointCollection>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <FlowDecision.True>
+                        <FlowStep x:Name="__ReferenceID9">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <av:Point x:Key="ShapeLocation">20,467</av:Point>
+                              <av:Size x:Key="ShapeSize">200,66</av:Size>
+                              <av:PointCollection x:Key="ConnectorLocation">220,500 250,500 250,467 410,467 410,497</av:PointCollection>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="History  database" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_15">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[StartTime]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[Date.Now.ToString("MM/dd/yy hh:mm:ss")]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_16">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[stMachineName]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[Environment.MachineName]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <ui:ExecuteQuery ContinueOnError="{x:Null}" DataTable="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_10" ProviderName="System.Data.Odbc" Sql="[&quot;INSERT INTO RPALIB.ROBOT_LOG_HCM_SCH VALUES('Assemble Material Report','&quot;+StartTime +&quot;'&quot; +&quot;  ,   '','','','','','','', ' &quot; +  stMachineName + &quot;  ') &quot;]" ConnectionString="Dsn=RPALIB;uid=robot;pwd=robotics">
+                              <ui:ExecuteQuery.Parameters>
+                                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                              </ui:ExecuteQuery.Parameters>
+                            </ui:ExecuteQuery>
+                          </Sequence>
+                          <FlowStep.Next>
+                            <FlowStep x:Name="__ReferenceID10">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <av:Point x:Key="ShapeLocation">310,497</av:Point>
+                                  <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">510,530 550,530 550,586.5</av:PointCollection>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Sequence DisplayName="Check File Server" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="D:\Robotics\AssembleMaterialReport">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:CreateDirectory>
+                                <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="CreateDirectory_4" Path="D:\Robotics\AssembleMaterialReport\Output">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:CreateDirectory>
+                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_17">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="s:String[]">[FileNameSeverAss]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles("H:\Robotics\Assemble Material Report")]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                              <FlowStep.Next>
+                                <FlowDecision x:Name="__ReferenceID11" Condition="[FileNameSeverAss.Length &lt; 1]" DisplayName="Flow Decision" sap:VirtualizedContainerService.HintSize="79,87" sap2010:WorkflowViewState.IdRef="FlowDecision_4">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      <av:Point x:Key="ShapeLocation">510.5,586.5</av:Point>
+                                      <av:Size x:Key="ShapeSize">79,87</av:Size>
+                                      <av:PointCollection x:Key="TrueConnector">510.5,630 330,630 330,657</av:PointCollection>
+                                      <av:PointCollection x:Key="FalseConnector">589.5,630 750,630 750,657</av:PointCollection>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <FlowDecision.True>
+                                    <FlowStep x:Name="__ReferenceID13">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <av:Point x:Key="ShapeLocation">230,657</av:Point>
+                                          <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <Sequence DisplayName="not " sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                      </Sequence>
+                                    </FlowStep>
+                                  </FlowDecision.True>
+                                  <FlowDecision.False>
+                                    <FlowStep x:Name="__ReferenceID12">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <av:Point x:Key="ShapeLocation">650,657</av:Point>
+                                          <av:Size x:Key="ShapeSize">200,66</av:Size>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <Sequence DisplayName="Process" sap:VirtualizedContainerService.HintSize="326,707" sap2010:WorkflowViewState.IdRef="Sequence_46">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Sequence DisplayName="copy FILE" sap:VirtualizedContainerService.HintSize="284,615" sap2010:WorkflowViewState.IdRef="Sequence_45">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <Sequence sap:VirtualizedContainerService.HintSize="242,143" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:CopyFile ContinueOnError="{x:Null}" Destination="D:\Robotics\AssembleMaterialReport\Assemble_Material_Ver1.2.xls" DisplayName="Copy File Server" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="CopyFile_4" Overwrite="True" Path="H:\Robotics\Assemble Material Report\ROBOT\Lockpin_ POP_Ver1.1.xls">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:CopyFile>
+                                          </Sequence>
+                                          <Sequence DisplayName="Open File Input" sap:VirtualizedContainerService.HintSize="242,66" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" Workbook="[WbAssInput]" WorkbookPath="D:\Robotics\AssembleMaterialReport\Assemble_Material_Ver1.2.xls">
+                                              <ui:ExcelApplicationScope.Body>
+                                                <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                                                  <ActivityAction.Argument>
+                                                    <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                                                  </ActivityAction.Argument>
+                                                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="426,1009" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                                    <sap:WorkflowViewStateService.ViewState>
+                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      </scg:Dictionary>
+                                                    </sap:WorkflowViewStateService.ViewState>
+                                                    <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="Workbook_Open" EntryMethodParameters="[{strDayRencent}]" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_11" />
+                                                    <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="CommandButton1_Click" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_12" />
+                                                    <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="TestFiter" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_13" />
+                                                    <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="ColorSent" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_14" />
+                                                    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="384,51" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <TryCatch.Try>
+                                                        <ui:InvokeVBA OutputValue="{x:Null}" CodeFilePath="H:\Robotics\Reference\AssembleMaterialReport\DemoClick.bas" DisplayName="Invoke VBA" EntryMethodName="Tester" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeVBA_15" />
+                                                      </TryCatch.Try>
+                                                      <TryCatch.Catches>
+                                                        <Catch x:TypeArguments="si:IOException" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+                                                          <sap:WorkflowViewStateService.ViewState>
+                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                            </scg:Dictionary>
+                                                          </sap:WorkflowViewStateService.ViewState>
+                                                          <ActivityAction x:TypeArguments="si:IOException">
+                                                            <ActivityAction.Argument>
+                                                              <DelegateInArgument x:TypeArguments="si:IOException" Name="exception" />
+                                                            </ActivityAction.Argument>
+                                                          </ActivityAction>
+                                                        </Catch>
+                                                      </TryCatch.Catches>
+                                                    </TryCatch>
+                                                    <ui:CopyFile ContinueOnError="{x:Null}" Destination="H:\Robotics\Reference\AssembleMaterialReport\ExportmyChart.jpg" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="384,157" sap2010:WorkflowViewState.IdRef="CopyFile_5" Overwrite="True" Path="D:\Robotics\ExportmyChart.jpg" />
+                                                    <ui:ExcelSaveWorkbook DisplayName="Save Workbook" sap:VirtualizedContainerService.HintSize="384,22" sap2010:WorkflowViewState.IdRef="ExcelSaveWorkbook_2" />
+                                                    <ui:ExcelCloseWorkbook DisplayName="Close Workbook" sap:VirtualizedContainerService.HintSize="384,59" sap2010:WorkflowViewState.IdRef="ExcelCloseWorkbook_2" Workbook="[WbAssInput]" />
+                                                  </Sequence>
+                                                </ActivityAction>
+                                              </ui:ExcelApplicationScope.Body>
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </ui:ExcelApplicationScope>
+                                          </Sequence>
+                                          <Sequence DisplayName="Send Email" sap:VirtualizedContainerService.HintSize="242,158" sap2010:WorkflowViewState.IdRef="Sequence_43">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <Sequence DisplayName="Sq\\ Send email Complete" sap:VirtualizedContainerService.HintSize="346,725" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                              <Sequence DisplayName="Sq\\ Creat mail body" sap:VirtualizedContainerService.HintSize="304,542" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <Assign sap:VirtualizedContainerService.HintSize="262,64" sap2010:WorkflowViewState.IdRef="Assign_18">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[stBodyMail]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String" xml:space="preserve">
+&lt;html&gt; 
+	
+	&lt;head&gt; 
+	&lt;meta http-equiv=Content-Type content=““text/html; charset=windows-1252”“&gt; 
+	&lt;meta name=Generator content=““Microsoft Word 15 (filtered)”“&gt; 
+	&lt;style&gt; 
+	&lt;!-- 
+	/* Font Definitions */ 
+	@font-face 
+	{font-family:Helv; 
+	panose-1:2 11 6 4 2 2 2 3 2 4;} 
+	@font-face 
+	{font-family:Wingdings; 
+	panose-1:5 0 0 0 0 0 0 0 0 0;} 
+	@font-face 
+	{font-family:”“MS Mincho”“; 
+	panose-1:2 2 6 9 4 2 5 8 3 4;} 
+	@font-face 
+	{font-family:”“Cambria Math”“; 
+	panose-1:2 4 5 3 5 4 6 3 2 4;} 
+	@font-face 
+	{font-family:Calibri; 
+	panose-1:2 15 5 2 2 2 4 3 2 4;} 
+	@font-face 
+	{font-family:”“Segoe UI”“; 
+	panose-1:2 11 5 2 4 2 4 2 2 3;} 
+	@font-face 
+	{font-family:Tahoma; 
+	panose-1:2 11 6 4 3 5 4 4 2 4;} 
+	@font-face 
+	{font-family:Verdana; 
+	panose-1:2 11 6 4 3 5 4 4 2 4;} 
+	@font-face 
+	{font-family:Webdings; 
+	panose-1:5 3 1 2 1 5 9 6 7 3;} 
+	@font-face 
+	{font-family:”“\@MS Mincho”“; 
+	panose-1:0 0 0 0 0 0 0 0 0 0;} 
+	/* Style Definitions */ 
+	p.MsoNormal, li.MsoNormal, div.MsoNormal 
+	{margin-top:0cm; 
+	margin-right:0cm; 
+	margin-bottom:8.0pt; 
+	margin-left:0cm; 
+	line-height:106%; 
+	font-size:11.0pt; 
+	font-family:”“Calibri”“,sans-serif;} 
+	.MsoChpDefault 
+	{font-size:10.0pt; 
+	font-family:”“Calibri”“,sans-serif;} 
+	@page WordSection1 
+	{size:612.0pt 792.0pt; 
+	margin:72.0pt 72.0pt 72.0pt 72.0pt;} 
+	div.WordSection1 
+	{page:WordSection1;} 
+	--&gt; 
+	&lt;/style&gt; 
+	
+	&lt;/head&gt; 
+	
+	&lt;body lang=EN-US&gt; 
+	
+
+    
+	&lt;div Class=WordSection1&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;span style='font-size:10.0pt;line-height:106%;font-family: 
+	““Segoe UI”“,sans-serif;color:black'&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;b&gt;&lt;span style='font-size:15px;line-height:106%; 
+	font-family:”“Segoe UI”“,sans-serif;color:black'&gt;Dear [UserName] &lt;/span&gt;&lt;/b&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt'&gt;&lt;span 
+	style='font-size:10.0pt;line-height:106%;font-family:”“Segoe UI”“,sans-serif; 
+	color:black'&gt;[BodyMail]&lt;br&gt; 
+	&lt;br&gt; 
+	&lt;/span&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;span style='font-size:10.0pt;line-height:106%;font-family: 
+	““Segoe UI”“,sans-serif;color:black'&gt;Best regards,&lt;/span&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;b&gt;&lt;span style='font-size:10.0pt;line-height:106%; 
+	font-family:”“Segoe UI”“,sans-serif;color:black'&gt;Robotics (Mr.) – [NameMachine]&lt;/span&gt;&lt;/b&gt;&lt;/p&gt; 
+	
+	&lt;p Class=MsoNormal&gt;&lt;span style='font-size:8.0pt;line-height:106%;font-family: 
+	““Verdana”“,sans-serif;color:black'&gt;===============================================&lt;br&gt; 
+	&lt;/span&gt;&lt;span style='font-size:8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif; 
+	color:navy'&gt;| &lt;/span&gt;&lt;span style='font-size:10.0pt;line-height:106%;font-family: 
+	Wingdings;color:navy'&gt;*&lt;/span&gt;&lt;span style='font-size:10.0pt;line-height:106%; 
+	font-family:”“Verdana”“,sans-serif;color:navy'&gt; &lt;/span&gt;&lt;span style='font-size: 
+	8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif;color:navy'&gt;Email: &lt;u&gt;developer@ykk.com.vn&lt;/u&gt; 
+	| Website:  &lt;u&gt;www.ykk.com.vn&lt;/u&gt;&lt;/span&gt;&lt;span style='font-size:8.0pt; 
+	line-height:106%;font-family:”“Verdana”“,sans-serif;color:black'&gt; &lt;/span&gt;&lt;b&gt;&lt;span 
+	style='font-size:8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif; 
+	color:navy'&gt;&lt;br&gt; 
+	&lt;br&gt; 
+	YKK VietNam Co., LTD - Ho Chi Minh Branch Office&lt;/span&gt;&lt;/b&gt;&lt;span 
+	style='font-size:8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif; 
+	color:navy'&gt;&lt;br&gt; 
+	4th Floor, AB Tower, 76 Le Lai St., Ben Thanh Ward, Dist. 1, HCMC, Viet Nam&lt;br&gt; 
+	&lt;/span&gt;&lt;span style='font-size:8.0pt;line-height:106%;font-family:”“Verdana”“,sans-serif; 
+	color:green'&gt;===============================================&lt;br&gt; 
+	&lt;/span&gt;&lt;b&gt;&lt;span style='font-size:14.0pt;line-height:106%;font-family:Webdings; 
+	color:green'&gt;P&lt;/span&gt;&lt;/b&gt;&lt;span style='font-size:6.0pt;line-height:106%; 
+	font-family:”“Helv”“,sans-serif;color:black'&gt; &lt;/span&gt;&lt;b&gt;&lt;span style='font-size: 
+	8.0pt;line-height:106%;font-family:”“Arial”“,sans-serif;color:green'&gt;&amp;quot;Please 
+	consider the environment before printing this e-mail&amp;quot;&lt;br&gt; 
+	&lt;/span&gt;&lt;/b&gt;&lt;b&gt;&lt;span style='font-size:6.0pt;line-height:106%;font-family:”“Tahoma”“,sans-serif; 
+	color:black'&gt;CONFIDENTIAL NOTE:&lt;/span&gt;&lt;/b&gt;&lt;span style='font-size:7.0pt; 
+	line-height:106%;font-family:”“Tahoma”“,sans-serif;color:black'&gt; The information 
+	contained In this email Is intended only For the use Of the individual Or 
+	entity named&lt;br&gt; 
+	above And may contain information that Is privileged, confidential And exempt 
+	From disclosure under applicable law. If the&lt;br&gt; 
+	reader Of this message Is Not the intended recipient, you are hereby notified 
+	that any dissemination, distribution Or copying&lt;br&gt; 
+	Of this communication Is strictly prohibited. Thank you.&lt;br&gt;&lt;/span&gt;&lt;/p&gt; 
+	
+	&lt;/div&gt; 
+	
+	&lt;/body&gt; 
+	
+	&lt;/html&gt;
+</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[stBodyNotificationMail]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String" xml:space="preserve">["&lt;p style ='margin-bottom : 20px'&gt;Please look through the image as below and refer to the details file in output result.&lt;/p&gt;" + "&lt;br&gt;" +"&lt;img  style ='width : 1175px !important; hight : 50% ;  overflow: hidden;'src='H:\Robotics\Reference\AssembleMaterialReport\ExportmyChart.jpg' atl ='' /&gt;"]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+                                                  <Assign.To>
+                                                    <OutArgument x:TypeArguments="x:String">[stMachineName]</OutArgument>
+                                                  </Assign.To>
+                                                  <Assign.Value>
+                                                    <InArgument x:TypeArguments="x:String">[environment.MachineName]</InArgument>
+                                                  </Assign.Value>
+                                                </Assign>
+                                                <p:ReplaceString DisplayName="Replace string\\ Replace UserName mail" ExistingValue="%[UserName]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="ReplaceString_4" Input="[stBodyMail]" Replacement="Slider Section" Result="[stBodyMail]" />
+                                                <p:ReplaceString DisplayName="Replace string\\ Replace body mail" ExistingValue="%[BodyMail]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="ReplaceString_5" Input="[stBodyMail]" Replacement="[stBodyNotificationMail]" Result="[stBodyMail]" />
+                                                <p:ReplaceString DisplayName="Replace string\\ Replace Name Machine Mail" ExistingValue="%[NameMachine]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="ReplaceString_6" Input="[stBodyMail]" Replacement="[stMachineName]" Result="[stBodyMail]" />
+                                              </Sequence>
+                                              <ui:SendMail Bcc="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Body="[stBodyMail]" Cc="[&quot;huynhyennhi@ykk.com.vn&quot;+&quot;,&quot; +&quot;ngoctham@ykk.com.vn&quot;+&quot;,&quot;+&quot;vansang@ykk.com.vn&quot;]" DisplayName="Send SMTP Mail Message" Email="[dicDIC(&quot;EmailAddressDeveloper&quot;).ToString]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="304,51" sap2010:WorkflowViewState.IdRef="SendMail_2" IsBodyHtml="True" Name="[dicDIC(&quot;NameSenderMail&quot;).ToString]" Password="[dicDIC(&quot;EmailPassword&quot;).ToString]" Port="25" SecureConnection="Auto" Server="[dicDIC(&quot;IPSendMailServer&quot;).ToString]" Subject="Check Material Lock pin Color DS" To="[&quot;TruongLeThu@ykk.com.vn&quot; + &quot;,&quot; + &quot;TranThanhTruc@ykk.com.vn&quot; + &quot;,&quot; + &quot;DinhThinh@ykk.com.vn&quot; + &quot;,&quot; + &quot;HieuThao@ykk.com.vn&quot; + &quot;,&quot; + &quot;NguyenHoangYen@ykk.com.vn &quot; + &quot; ,&quot; + &quot;KimCuc@ykk.com.vn&quot; + &quot;,&quot; + &quot;a-horiuchi@ykk.com.vn&quot; + &quot;,&quot; + &quot;QuocTai@ykk.com.vn&quot;]">
+                                                <ui:SendMail.Files>
+                                                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                                                    <InArgument x:TypeArguments="x:String">
+                                                      <Literal x:TypeArguments="x:String">D:\Robotics\AssembleMaterialReport\Assemble_Material_Ver1.2.xls</Literal>
+                                                    </InArgument>
+                                                  </scg:List>
+                                                </ui:SendMail.Files>
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                              </ui:SendMail>
+                                            </Sequence>
+                                          </Sequence>
+                                          <Sequence DisplayName="History  database" sap:VirtualizedContainerService.HintSize="242,66" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                                            <Sequence.Variables>
+                                              <Variable x:TypeArguments="x:String" Name="strEndTime" />
+                                            </Sequence.Variables>
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_21">
+                                              <Assign.To>
+                                                <OutArgument x:TypeArguments="x:String">[strEndTime]</OutArgument>
+                                              </Assign.To>
+                                              <Assign.Value>
+                                                <InArgument x:TypeArguments="x:String">[Date.Now.ToString("MM/dd/yy hh:mm:ss")]</InArgument>
+                                              </Assign.Value>
+                                            </Assign>
+                                            <ui:ExecuteQuery ContinueOnError="{x:Null}" DataTable="{x:Null}" ExistingDbConnection="{x:Null}" TimeoutMS="{x:Null}" CommandType="Text" DisplayName="Execute query" sap:VirtualizedContainerService.HintSize="334,88" sap2010:WorkflowViewState.IdRef="ExecuteQuery_11" ProviderName="System.Data.Odbc" Sql="[&quot;UPDATE RPALIB.ROBOT_LOG_HCM_SCH SET RESULT = 'COMPLETE' , END_TIME = '&quot; +strEndTime + &quot; ' WHERE  START_TIME = '&quot; +StartTime +&quot;'  &quot;]" ConnectionString="Dsn=RPALIB;uid=robot;pwd=robotics">
+                                              <ui:ExecuteQuery.Parameters>
+                                                <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                              </ui:ExecuteQuery.Parameters>
+                                            </ui:ExecuteQuery>
+                                          </Sequence>
+                                          <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="242,22" sap2010:WorkflowViewState.IdRef="Delete_3" Path="D:\Robotics\ExportmyChart.jpg" />
+                                        </Sequence>
+                                      </Sequence>
+                                    </FlowStep>
+                                  </FlowDecision.False>
+                                </FlowDecision>
+                              </FlowStep.Next>
+                            </FlowStep>
+                          </FlowStep.Next>
+                        </FlowStep>
+                      </FlowDecision.True>
+                    </FlowDecision>
+                  </FlowStep.Next>
+                </FlowStep>
+              </FlowStep.Next>
+            </FlowStep>
+            <x:Reference>__ReferenceID7</x:Reference>
+            <x:Reference>__ReferenceID8</x:Reference>
+            <x:Reference>__ReferenceID9</x:Reference>
+            <x:Reference>__ReferenceID10</x:Reference>
+            <x:Reference>__ReferenceID11</x:Reference>
+            <x:Reference>__ReferenceID12</x:Reference>
+            <x:Reference>__ReferenceID13</x:Reference>
+          </Flowchart>
+        </TryCatch.Try>
+        <TryCatch.Catches>
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ActivityAction x:TypeArguments="s:Exception">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+              </ActivityAction.Argument>
+            </ActivityAction>
+          </Catch>
+        </TryCatch.Catches>
+      </TryCatch>
+    </FlowStep>
+  </Flowchart>
+</Activity>
